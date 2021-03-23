@@ -1,20 +1,33 @@
 class BMI extends React.Component {
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        weight: "",
+        heightft: "",
+        heightin: "",
+        result: ""
+        
+      }
+    }
+
     render() {
       return (
         <div>
           <form >
-            {/* <h1>Hello</h1> */}
+            <h1>BMI</h1>
+            <p> </p>
             <p>Weight</p>
-            <input type="number" id="weight" name="weight" /> Kg
+            <input onChange={this.updateWeight} value={this.state.weight} /> Kg
             <p> </p>
 
             <p>Height</p>
-            <input type="number" id="heightft" name="heightft" /> ft 
-            <input type="number" id="heightin" name="heightin" /> in 
+            <input onChange={this.updateHeightft} value={this.state.heightft}/> ft 
+            <input onChange={this.updateHeightin} value={this.state.heightin}/> in 
             <p> </p>
-            <input type="button" value="Calculate"  onClick={this.bmicalculate}/>
+            <input type="button" value="Calculate" onClick={this.bmicalculate}/>
             <p> </p>
-            <p id="showbmiresult"></p>
+            <h4>{this.state.result}</h4>
 
           </form>
 
@@ -22,10 +35,30 @@ class BMI extends React.Component {
         </div>
       );
     }
+
+    updateWeight = (event) => {
+      this.setState({
+        weight: event.target.value
+      })
+    }
+
+    updateHeightft = (event) => {
+      this.setState({
+        heightft: event.target.value
+      })
+    }
+    
+    updateHeightin = (event) => {
+      this.setState({
+        heightin: event.target.value
+      })
+    }
+
+
     bmicalculate = () => {
-      var Weight = parseFloat(document.getElementById("weight").value);
-      var Heightft = parseFloat(document.getElementById("heightft").value);
-      var Heightin = parseFloat(document.getElementById("heightin").value);
+      var Weight = parseFloat(this.state.weight);
+      var Heightft = parseFloat(this.state.heightft);
+      var Heightin = parseFloat(this.state.heightin);
       Heightft = Heightft*0.3048;
       Heightin = Heightin*0.0254;
 
@@ -34,46 +67,63 @@ class BMI extends React.Component {
       Height = Height*Height;
 
       var bmical = Weight/Height;
-      var result;
+      
       if(bmical<18.5){
-        result = "Underweight";
+        this.setState({
+          result: "Underweight",
+        })
       }
       if(bmical>=18.5 && bmical<25.0){
-        result = "Normal";
+        this.setState({
+          result: "Normal",
+        })
       }
       if(bmical>=25.0 && bmical<30.0){
-        result = "Overweight";
+        this.setState({
+          result: "Overweight",
+        })
       }
       if(bmical>=30.0){
-        result = "Obese"
+        this.setState({
+          result: "Obese",
+        })
       }
-
-
-      document.getElementById("showbmiresult").innerHTML = result;
-
-
 
     }
   }
 
   class Calculator extends React.Component {
 
+    constructor(props) {
+      super(props);
+      this.state = {
+        num1: "",
+        num2: "",
+        result: ""
+      }
+    }
+
     render() {
       return (
 
         <div>
+            <h1>Calculator</h1>
+            <p> </p>
             <p>Input 1</p>
-            <input type="number" id="num1" name="num1" />
+            <input onChange={this.updateInputone} value={this.state.num1} />
             <p> </p>
 
             <p>Input 2</p>
-            <input type="number" id="num2" name="num2" />
+            <input onChange={this.updateInputtwo} value={this.state.num2} />
             <p> </p>
             <input type="button" value="+" onClick={this.sum}  />
             <input type="button" value="-" onClick={this.sub}  />
-            <input type="button" value="*" onClick={this.divide}  />
-            <input type="button" value="/" onClick={this.multiply}  />
+            <input type="button" value="*" onClick={this.multiply}  />
+            <input type="button" value="/" onClick={this.divide}  />
             <p> </p>
+            <div id="resultbox"> Result: 
+              <p id="showcalculation">{this.state.result}</p>
+            </div> 
 
     
         </div>
@@ -81,55 +131,61 @@ class BMI extends React.Component {
       );
     }
 
+    updateInputone = (event) => {
+      this.setState({
+        num1: event.target.value
+      })
+    }
+
+    updateInputtwo = (event) => {
+      this.setState({
+        num2: event.target.value
+      })
+    }
+
+
     sum = () => {
-      var number1 = parseInt(document.getElementById('num1').value);
-      var number2 = parseInt(document.getElementById('num2').value);
-      var result = number1 + number2;
+      var number1 = parseInt(this.state.num1);
+      var number2 = parseInt(this.state.num2);
+      var res = number1 + number2;
 
-      result = result.toString();
+      this.setState({
+        result: res + "",
+      })            
 
-      alert(result);
-
-      document.getElementById("showcalculation").innerHTML = result; 
 
     }
 
     sub = () => {
-      var number1 = parseInt(document.getElementById('num1').value);
-      var number2 = parseInt(document.getElementById('num2').value);
-      var result = number1 - number2;
+      var number1 = parseInt(this.state.num1);
+      var number2 = parseInt(this.state.num2);
+      var res = number1 - number2;
 
-      result = result.toString();
-
-      alert(result);
-
-      document.getElementById("showcalculation").innerHTML = result; 
+      this.setState({
+        result: res + "",
+      })      
 
     }
 
     divide = () => {
-      var number1 = parseInt(document.getElementById('num1').value);
-      var number2 = parseInt(document.getElementById('num2').value);
-      var result = number1/number2;
+      var number1 = parseInt(this.state.num1);
+      var number2 = parseInt(this.state.num2);
+      var res = number1/number2;
 
-      result = result.toString();
-
-      alert(result);
-
-      document.getElementById("showcalculation").innerHTML = result; 
+      this.setState({
+        result: res + "",
+      })      
 
     }
 
     multiply = () => {
-      var number1 = parseInt(document.getElementById('num1').value);
-      var number2 = parseInt(document.getElementById('num2').value);
-      var result = number1*number2;
+      var number1 = parseInt(this.state.num1);
+      var number2 = parseInt(this.state.num2);
+      var res = number1*number2;
 
-      result = result.toString();
-
-      alert(result);
-
-      document.getElementById("showcalculation").innerHTML = result; 
+      this.setState({
+        result: res + "",
+      })  
 
     }
   }
