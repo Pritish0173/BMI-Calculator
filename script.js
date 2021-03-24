@@ -18,14 +18,14 @@ class BMI extends React.Component {
             <h1>BMI</h1>
             <p> </p>
             <p>Weight</p>
-            <input onChange={this.updateWeight} value={this.state.weight} /> Kg
+            <input class="txt" onChange={this.updateWeight} value={this.state.weight} /> Kg
             <p> </p>
 
             <p>Height</p>
-            <input onChange={this.updateHeightft} value={this.state.heightft}/> ft 
-            <input onChange={this.updateHeightin} value={this.state.heightin}/> in 
+            <input class="txt" onChange={this.updateHeightft} value={this.state.heightft}/> ft 
+            <input class="txt" onChange={this.updateHeightin} value={this.state.heightin}/> in 
             <p> </p>
-            <input type="button" value="Calculate" onClick={this.bmicalculate}/>
+            <input class="btn" type="button" value="Calculate" onClick={this.bmicalculate}/>
             <p> </p>
             <h4>{this.state.result}</h4>
 
@@ -110,16 +110,16 @@ class BMI extends React.Component {
             <h1>Calculator</h1>
             <p> </p>
             <p>Input 1</p>
-            <input onChange={this.updateInputone} value={this.state.num1} />
+            <input class="txt" onChange={this.updateInputone} value={this.state.num1} />
             <p> </p>
 
             <p>Input 2</p>
-            <input onChange={this.updateInputtwo} value={this.state.num2} />
+            <input class="txt" onChange={this.updateInputtwo} value={this.state.num2} />
             <p> </p>
-            <input type="button" value="+" onClick={this.sum}  />
-            <input type="button" value="-" onClick={this.sub}  />
-            <input type="button" value="*" onClick={this.multiply}  />
-            <input type="button" value="/" onClick={this.divide}  />
+            <input class="btn" type="button" value="+" onClick={this.sum}  />
+            <input class="btn" type="button" value="-" onClick={this.sub}  />
+            <input class="btn" type="button" value="*" onClick={this.multiply}  />
+            <input class="btn" type="button" value="/" onClick={this.divide}  />
             <p> </p>
             <div id="resultbox"> Result: 
               <p id="showcalculation">{this.state.result}</p>
